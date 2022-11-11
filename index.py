@@ -12,11 +12,8 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     homepage = "<h1>李幸諭Python網頁</h1>"
-    
     homepage += "<br><a href=/read>讀取Firestore資料</a><br>"
     return homepage
-
- 
 
 @app.route("/read", methods=["GET", "POST"])
 def read():
@@ -31,16 +28,14 @@ def read():
         result = ""
         for doc in docs:
             dict = doc.to_dict()
-            if cond in dict["Course"] and tea in dict["Leacture]:
+            if cond in dict["Course"] and tea in dict["Leacture"]:
                 result += dict["Leacture"]+"老師開的"+dict["Course"]+"課程，每周"+dict["Time"]+"於"+dict["Room"]+"上課<br>"
         if result == "":
             result = "抱歉，查無相關條件的選修課程"
-        return result
+        return result
     else:
         return render_template("read.html")
 
-
-
 #if __name__ == "__main__":
-    #app.run()
+#app.run()
    
